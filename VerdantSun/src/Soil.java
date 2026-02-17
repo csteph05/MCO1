@@ -10,4 +10,7 @@ public class Soil {
         this.fertilizer = null;
         this.isBlocked = false;
     }
+
+    // todo: getters
+    // todo: methods
 }

@@ -8,4 +8,6 @@ public class Fertilizer {
         this.price = price;
         this.effectDays = effectDays;
     }
+
+    // todo: getters for name, price, effectDays
 }

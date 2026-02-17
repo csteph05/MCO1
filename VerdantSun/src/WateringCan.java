@@ -5,4 +5,6 @@ public class WateringCan {
     public WateringCan(){
         this.currentWtrLevel = maxWtrLevel;
     }
+
+    // todo: methods
 }

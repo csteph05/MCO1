@@ -26,6 +26,9 @@ public class Plant {
         this.preferredSoil = preferredSoil;
         this.isWatered = false; // specs: Defaults to false
     }
+
+    // todo: getters
+    // todo: methods, something for isWatered flag, grow etc.
 }
 
 
