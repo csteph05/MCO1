@@ -29,17 +29,53 @@ public class WateringCan {
      *
      * @return current water level
      */
+
     public int getCurrentWtrLevel(){
         return currentWtrLevel;
     }
 
     /**
-     * Sets the current water level.
-     * The controller should manage this when watering plants or refilling
+     * Checks if the watering can is completely empty
      *
-     * @param currentWtrLevel new water level
+     *
+     * @return true if empty, false otherwise
      */
-    public void setCurrentWtrLevel(int currentWtrLevel) {
-        this.currentWtrLevel = currentWtrLevel;
+
+    public boolean isEmpty() {
+
+        return currentWtrLevel == 0;
+    }
+
+    /**
+     * Checking if the watering can is at maximum capacity.
+     *
+     * @return true if full, false otherwise
+     */
+
+    public boolean isFull(){
+        return currentWtrLevel == maxWtrLevel;
+    }
+
+    /**
+     * Refills the watering can to maximum cap
+     *
+     */
+
+    public void refill(){
+        this.currentWtrLevel = maxWtrLevel;
+    }
+
+    /**
+     * Deducts 1 unit of water if the can is not empty
+     *
+     * @return true if water was used successfully, false if the can was empty
+     */
+
+    public boolean useWater(){
+        if (currentWtrLevel > 0){
+            currentWtrLevel--;
+            return true;
+        }
+        return false;
     }
 }

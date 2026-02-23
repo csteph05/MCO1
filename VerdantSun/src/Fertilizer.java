@@ -19,6 +19,24 @@ public class Fertilizer {
     }
 
     /**
+     * Checks if the fertilizer has run out of active days.
+     * @return true if effectDays is 0 or less
+     */
+    public boolean isExpired() {
+        return effectDays <= 0;
+    }
+
+    /**
+     * Decreases the remaining effect duration by 1 day.
+     * Replaces the generic setter to prevent illegal values.
+     */
+    public void reduceEffectDays() {
+        if (effectDays > 0) {
+            effectDays--;
+        }
+    }
+
+    /**
      * Returns the name of the Fertilizer
      *
      * @return the name
@@ -54,6 +72,7 @@ public class Fertilizer {
      *
      * @param effectDays the new num of remaining effect days
      */
+
     public void setEffectDays(int effectDays){
         this.effectDays = effectDays;
     }

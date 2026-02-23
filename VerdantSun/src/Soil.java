@@ -3,6 +3,7 @@ public class Soil {
     private Plant plant;
     private Fertilizer fertilizer;
     private boolean isBlocked;
+    private boolean isFertilizerPermanent;
 
     /**
      * Constructs a Soil tile with a given soil type.
@@ -16,6 +17,88 @@ public class Soil {
         this.plant = null;
         this.fertilizer = null;
         this.isBlocked = false;
+        this.isFertilizerPermanent = false;
+    }
+
+    /**
+     * checks if a plant is currently growing on this tile.
+     *
+     *
+     * @return true if occupied
+     */
+    public boolean isOccupied(){
+        return plant != null;
+    }
+
+    /**
+     * Checks if fertilizer is currently applied.
+     * @return true if fertilized
+     */
+    public boolean hasFertilizer() {
+        return fertilizer != null;
+    }
+
+    /**
+     * Attempts to plant a seed if the tile is available.
+     * @param plant the Plant object to place
+     * @return true if successful, false if blocked or occupied
+     */
+    public boolean plantSeed(Plant plant) {
+        if (!isOccupied() && !isBlocked) {
+            this.plant = plant;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Harvests or removes the plant and returns its value.
+     * @return harvest value, or 0.0f if not mature or empty
+     */
+    public float removeOrHarvest() {
+        if (plant == null) {
+            return 0.0f;
+        }
+        float value = 0.0f;
+        if (plant.isMature()) {
+            value = plant.harvestValue();
+        }
+        plant = null;
+        return value;
+    }
+
+    /**
+     * Applies fertilizer to the soil.
+     * @param fertilizer the fertilizer to apply
+     * @return true if successful
+     */
+    public boolean applyFertilizer(Fertilizer fertilizer) {
+        if (!hasFertilizer()) {
+            this.fertilizer = fertilizer;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Removes fertilizer unless it is permanent (Meteorite effect).
+     */
+    public void removeFertilizer() {
+        if (!isFertilizerPermanent) {
+            this.fertilizer = null;
+        }
+    }
+
+    /**
+     * Waters the plant on this soil if it exists.
+     * @return true if watering was successful
+     */
+    public boolean waterSoil() {
+        if (isOccupied()) {
+            plant.water(); // Calls the water method in Plant
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -33,6 +116,7 @@ public class Soil {
      *
      * @return the plant object, or null if none
      */
+
     public Plant getPlant(){
         return plant;
     }
@@ -42,6 +126,7 @@ public class Soil {
      *
      * @return the Fertilizer object, or null if none
      */
+
     public Fertilizer getFertilizer(){
         return fertilizer;
     }
@@ -51,6 +136,7 @@ public class Soil {
      *
      * @return true if blocked, false otherwise
      */
+
     public boolean isBlocked() {
         return isBlocked;
     }
@@ -60,6 +146,7 @@ public class Soil {
      *
      * @param plant the Plant object to place on the soil
      */
+
     public void setPlant(Plant plant){
         this.plant = plant;
     }
@@ -79,9 +166,29 @@ public class Soil {
      *
      * @param blocked true if blocked, false to unblock
      */
+
     public void setBlocked(boolean blocked){
         this.isBlocked = blocked;
     }
 
+    /**
+     *
+     *
+     * @param
+    */
+
+    public boolean isFertilizerPermanent() {
+        return isFertilizerPermanent;
+    }
+
+    /**
+     *
+     *
+     * @param
+     */
+
+    public void setFertilizerPermanent(boolean permanent) {
+        this.isFertilizerPermanent = permanent;
+    }
 
 }

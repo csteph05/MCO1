@@ -16,6 +16,9 @@ public class Player {
         this.playerName = playerName;
         this.savings = savings;
         this.wateringCan = wateringCan;
+
+        this.farm = new Field(); // every new game by the player starts with the field
+        this.currentDay = 1; // every new game starts at day 1
     }
 
     /**
@@ -66,6 +69,7 @@ public class Player {
     public int getCurrentDay(){
         return currentDay;
     }
+
     /**
      * Sets the savings of the player
      *

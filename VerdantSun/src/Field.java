@@ -8,6 +8,7 @@ public class Field {
      * Constructor for creating a default 10x10 field
      * Each tile is initialized with a default Soil object of type "blank"
      */
+
     public Field (){
         this.tiles = new Soil[rows][cols];
         for (int i = 0; i < rows; i++){
@@ -22,6 +23,7 @@ public class Field {
      *
      * @return rows as an integer
      */
+
     public int getRows(){
         return rows;
     }
@@ -31,6 +33,7 @@ public class Field {
      *
      * @return columns as an integer
      */
+
     public int getCols() {
         return cols;
     }
@@ -42,6 +45,7 @@ public class Field {
      * @param col the col index
      * @return the Soil object at the specified location
      */
+
     public Soil getTile(int row, int col){
         return tiles[row][col];
     }
@@ -53,6 +57,7 @@ public class Field {
      * @param col the col index
      * @param soil the Soil object to set at the specified location
      */
+
     public void setTile(int row, int col, Soil soil){
         this.tiles[row][col] = soil;
     }
@@ -62,6 +67,7 @@ public class Field {
      *
      * @return 2D array of Soil objects.
      */
+
     public Soil[][] getTiles(){
         return tiles;
     }

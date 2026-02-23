@@ -1,11 +1,13 @@
+import java.util.*;
+
 public class Main {
     public static void main(String[] args){
-        System.out.println("Verdant Sun!");
+        Scanner scanner = new Scanner(System.in);
+        WateringCan waterCan = new WateringCan();
 
-        // Todo: initialize board/field objects
-        // Todo: game variables
-        // todo: scanner object for user input
+        Player myPlayer = new Player("FarmerTest", 1000, waterCan);
+         Controller game = new Controller(myPlayer, scanner);
+         game.startGame();
 
-        // todo: madami
     }
 }
