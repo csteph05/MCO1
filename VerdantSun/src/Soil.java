@@ -21,27 +21,31 @@ public class Soil {
     }
 
     /**
-     * checks if a plant is currently growing on this tile.
-     *
+     * checks if a plant is currently growing on this soil.
      *
      * @return true if occupied
      */
+
     public boolean isOccupied(){
         return plant != null;
     }
 
     /**
      * Checks if fertilizer is currently applied.
+     *
      * @return true if fertilized
      */
+
     public boolean hasFertilizer() {
         return fertilizer != null;
     }
 
     /**
      * Attempts to plant a seed if the tile is available.
+     *
      * @param plant the Plant object to place
      * @return true if successful, false if blocked or occupied
+     *
      */
     public boolean plantSeed(Plant plant) {
         if (!isOccupied() && !isBlocked) {
@@ -53,8 +57,10 @@ public class Soil {
 
     /**
      * Harvests or removes the plant and returns its value.
+     *
      * @return harvest value, or 0.0f if not mature or empty
      */
+
     public float removeOrHarvest() {
         if (plant == null) {
             return 0.0f;
@@ -69,9 +75,11 @@ public class Soil {
 
     /**
      * Applies fertilizer to the soil.
+     *
      * @param fertilizer the fertilizer to apply
      * @return true if successful
      */
+
     public boolean applyFertilizer(Fertilizer fertilizer) {
         if (!hasFertilizer()) {
             this.fertilizer = fertilizer;
@@ -83,6 +91,7 @@ public class Soil {
     /**
      * Removes fertilizer unless it is permanent (Meteorite effect).
      */
+
     public void removeFertilizer() {
         if (!isFertilizerPermanent) {
             this.fertilizer = null;
@@ -93,12 +102,34 @@ public class Soil {
      * Waters the plant on this soil if it exists.
      * @return true if watering was successful
      */
+
     public boolean waterSoil() {
         if (isOccupied()) {
-            plant.water(); // Calls the water method in Plant
+            plant.watered(); // Calls the water method in Plant
             return true;
         }
         return false;
+    }
+
+    /**
+     * Advances the soil tile to the next day.
+     * Handles plant growth (if the plant is watered) and daily fertilizer decay.
+     */
+
+    public void nextDay(){
+        if(isOccupied() && plant.isWatered()){
+            int stages = plant.getGrowthStagesPerDay(this.name, hasFertilizer());
+            plant.grow(stages);
+            plant.resetWater();
+
+            if(hasFertilizer() && !isFertilizerPermanent()){
+                fertilizer.reduceEffectDays();
+                if(fertilizer.isExpired()){
+                    removeFertilizer();
+                }
+            }
+
+        }
     }
 
     /**

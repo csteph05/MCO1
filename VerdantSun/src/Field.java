@@ -19,6 +19,30 @@ public class Field {
     }
 
     /**
+     * Checks if the given row and column indices are within the valid bounds of the field.
+     * Should be called before accessing any tile to prevent index out of bounds errors.
+     *
+     * @param row the row index to check
+     * @param col the column index to check
+     * @return true if the tile exists within the 10x10 grid, false otherwise
+     */
+    public boolean isTileValid(int row, int col){
+        return row >= 0 && row < rows && col >= 0 && col < cols;
+    }
+
+    /**
+     * Advances all tiles in the field to the next day.
+     * Each soil tile handles its own plant growth, watering reset, and fertilizer reduction.
+     */
+    public void nextDay(){
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                tiles[i][j].nextDay();
+            }
+        }
+    }
+
+    /**
      * Returns the number of rows in the field
      *
      * @return rows as an integer
@@ -47,7 +71,10 @@ public class Field {
      */
 
     public Soil getTile(int row, int col){
-        return tiles[row][col];
+        if (isTileValid(row, col)){
+            return tiles[row][col];
+        }
+        return null;
     }
 
     /**

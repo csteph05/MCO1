@@ -1,23 +1,29 @@
-/**
- * Plant represents the crop growing on a soil tile.
- * It handles its own growth stages and harvest value calculations.
- */
+// import com.google.gson.annotations.SerializedName;
+
+
 public class Plant {
 
     private final String name;
     private float sellPrice;
     private float seedPrice;
     private int yield;
-
     private int maxGrowth;
     private int currentGrowth;
-
     private String preferredSoil;
     private boolean isWatered;
 
     /**
-     * Constructor to create a Plant instance.
+     *  Constructor that creates a Plant instance with its name, sell/seed price, yield
+     *  maxGrowth, and it's preferredSoil.
+     *
+     * @param name is the name of the Plant
+     * @param sellPrice is the selling price per yield
+     * @param seedPrice is the cost of planting the seed
+     * @param yield is the number of crops produced
+     * @param maxGrowth
+     * @param preferredSoil is the preferred soil type of the plant
      */
+
     public Plant(String name, float sellPrice, float seedPrice,
                  int yield, int maxGrowth, String preferredSoil) {
         this.name = name;
@@ -30,11 +36,29 @@ public class Plant {
         this.isWatered = false;
     }
 
-    // --- BEHAVIOR METHODS ---
+    /**
+     * Calculates the total growth stages the plant gains in a day.
+     * The plant grows by a base of 1, with bonuses for preferred soil and fertilizer.
+     *
+     * @param soilType the type of soil plant is currently in
+     * @param hasFertilizer true if fertilizer is applied to the soil tile
+     *
+     * @return the total num of growth stages for the day
+     */
+    public int getGrowthStagesPerDay(String soilType, boolean hasFertilizer){
+        int stages = 1; // base growth
+        if(soilType.equals(this.preferredSoil)) stages += 1; // Soil bonus
+        if(hasFertilizer) stages += 1; // fertilizer bonus
+        return stages;
+    }
 
     /**
-     * Increases current growth by specified stages, capping at maxGrowth.
+     * Increases current growth stage of the plant by specific amt
+     * growth is capped at plant's maximum growth stage
+     *
+     * @param stages the number of growth stages to add to the plant
      */
+
     public void grow(int stages) {
         currentGrowth += stages;
         if (currentGrowth > maxGrowth) {
@@ -44,21 +68,25 @@ public class Plant {
 
     /**
      * Checks if the plant has reached its maximum growth.
+     *
      * @return true if mature
      */
+
     public boolean isMature() {
         return currentGrowth >= maxGrowth;
     }
 
     /**
      * Sets the watered status to true.
+     * plant has received water for the current day
      */
-    public void water() {
+    public void watered() {
         this.isWatered = true;
     }
 
     /**
-     * Resets the watered status to false (typically at the start of a new day).
+     * Resets the watered status of the plant to false.
+     * called at start of a new day
      */
     public void resetWater() {
         this.isWatered = false;
@@ -69,6 +97,7 @@ public class Plant {
      * Named specifically for Soil's removeOrHarvest() call.
      * @return total harvest value, or 0.0f if not mature
      */
+
     public float harvestValue() {
         if (isMature()) {
             return sellPrice * yield;
@@ -76,21 +105,78 @@ public class Plant {
         return 0.0f;
     }
 
-    // --- GETTERS & SETTERS ---
+    /**
+     * Returns the name of the Plant.
+     *
+     * @return the player's name
+     */
 
     public String getName() { return name; }
+
+    /**
+     *  Returns the sellPrice of the Plant.
+     *
+     * @return the sellPrice
+     */
+
     public float getSellPrice() { return sellPrice; }
+
+    /**
+     * Returns the seedPrice of the Plant.
+     *
+     * @return the seedPrice
+     */
+
     public float getSeedPrice() { return seedPrice; }
+
+    /**
+     * Returns the yield of the Plant.
+     *
+     * @return the yield
+     */
+
     public int getYield() { return yield; }
+
+    /**
+     * Returns the maximum growth stage of the Plant.
+     *
+     * @return the maxGrowth
+     */
+
     public int getMaxGrowth() { return maxGrowth; }
+
+    /**
+     * Returns the current growth stage of the Plant.
+     *
+     * @return the currentGrowth
+     */
+
     public int getCurrentGrowth() { return currentGrowth; }
+
+    /**
+     * Returns the preferredSoil type of the plant
+     *
+     * @return the preferredSoil type
+     */
+
     public String getPreferredSoil() { return preferredSoil; }
+
+    /**
+     * Returns whether the Plant has been watered.
+     *
+     * @return true if watered, false is not watered
+     */
 
     public boolean isWatered() {
         return isWatered;
     }
 
-    // Kept for compatibility, but prefer using water() and resetWater()
+    /**
+     * Sets the watered status of the Plant.
+     *
+     * @param watered True if plant is watered, false otherwise
+     */
+
     public void setWatered(boolean watered) {
         this.isWatered = watered;
     }

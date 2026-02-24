@@ -22,6 +22,45 @@ public class Player {
     }
 
     /**
+     * Adds the specified amount to the player's savings.
+     * Used when harvesting crops or gaining daily income.
+     *
+     * @param amount the amount to add to savings
+     */
+    public void addSavings(int amount){
+        if(amount > 0){
+            this.savings += amount;
+        }
+    }
+
+    /**
+     * * Deducts the specified amount from the player's savings if affordable.
+     * Used when buying seeds, fertilizer, or refilling the watering can.
+     *
+     * @param amount the amount to deduct
+     * @return true if deduction was successful, false if insufficient funds
+     */
+    public boolean deductSavings(int amount){
+        if(amount > 0 && savings >= amount){
+            savings -= amount;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the player has enough savings to afford a purchase.
+     *
+     * @param amount the cost to check against
+     * @return true if player can afford it, false otherwise
+     */
+    public boolean canAfford(int amount){
+        return savings >= amount;
+    }
+
+    // public void nextDay from sherimie for some reason
+
+    /**
      * Returns the name of player.
      *
      * @return the player's name
@@ -75,9 +114,5 @@ public class Player {
      *
      * @param savings is an integer that is the savings of the player
      */
-
-    public void setSavings(int savings){
-        this.savings = savings;
-    }
 
 }

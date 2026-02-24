@@ -20,8 +20,10 @@ public class Fertilizer {
 
     /**
      * Checks if the fertilizer has run out of active days.
+     *
      * @return true if effectDays is 0 or less
      */
+
     public boolean isExpired() {
         return effectDays <= 0;
     }
@@ -29,7 +31,9 @@ public class Fertilizer {
     /**
      * Decreases the remaining effect duration by 1 day.
      * Replaces the generic setter to prevent illegal values.
+     *
      */
+
     public void reduceEffectDays() {
         if (effectDays > 0) {
             effectDays--;
@@ -68,7 +72,7 @@ public class Fertilizer {
 
     /**
      * Setter for the remaining days for the fertilizer
-     * This is used when the controller reduces the fertilizer's effect as plants grow
+     *
      *
      * @param effectDays the new num of remaining effect days
      */
