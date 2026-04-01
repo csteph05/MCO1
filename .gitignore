@@ -1,0 +1,12 @@
+out/
+gen/
+*.class
+*.iml
+.idea/
+
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+*.log
