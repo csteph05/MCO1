@@ -62,7 +62,7 @@ public class SeedlingStage extends GrowthStage {
     }
 
     /**
-     * Determines the fertilizer consumption.
+     * Determines the fertilizer consumption rate.
      *
      * @return 1, representing the normal fertilizer consumption rate.
      */

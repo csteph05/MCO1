@@ -48,7 +48,7 @@ public abstract class GrowthStage {
     public abstract int getYieldMultiplier();
 
     /**
-     * Determines the fertilizer day cost when transitioning days.
+     * Determines the fertilizer consumption rate.
      * @return 1 for normal stages or 2 for specific stages.
      */
 
