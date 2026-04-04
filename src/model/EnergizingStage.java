@@ -59,6 +59,6 @@ public class EnergizingStage extends GrowthStage {
 
     @Override
     public int getFertilizerDaysConsumed(){
-        return 1;
+        return 2;
     }
 }
